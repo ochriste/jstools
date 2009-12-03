@@ -323,6 +323,8 @@ def jsfiles_for_dir(sourcedir, jssuffix=SUFFIX_JAVASCRIPT):
     for root, dirs, entries in os.walk(sourcedir):
         for filename in entries:
             if filename.endswith(jssuffix) and not filename.startswith("."):
-                filepath = os.path.join(root, filename)[len(sourcedir)+1:]
+                # add trailing separator if it doesnt exist
+                sourcedir = os.path.join(sourcedir,'')
+                filepath = os.path.join(root, filename)[len(sourcedir):]
                 filepath = filepath.replace("\\", "/")
                 yield filepath
